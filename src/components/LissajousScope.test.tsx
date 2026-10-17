@@ -30,13 +30,13 @@ describe("LissajousScope", () => {
       <LissajousScope
         x={firstX}
         y={firstY}
-        title="Тестовая кривая"
-        ariaLabel="XY-кривая тестового сигнала"
+        title="Test curve"
+        ariaLabel="XY curve of the test signal"
       />,
     );
 
     expect(
-      screen.getByRole("img", { name: /Тестовая кривая.*XY-кривая/ }),
+      screen.getByRole("img", { name: /Test curve.*XY curve/ }),
     ).toBeInTheDocument();
     expect(requestAnimationFrame).toHaveBeenCalledOnce();
 
@@ -47,8 +47,8 @@ describe("LissajousScope", () => {
       <LissajousScope
         x={Float32Array.of(0, 0.5, 0, -0.5, 0)}
         y={firstY}
-        title="Тестовая кривая"
-        ariaLabel="XY-кривая тестового сигнала"
+        title="Test curve"
+        ariaLabel="XY curve of the test signal"
       />,
     );
     expect(requestAnimationFrame).toHaveBeenCalledTimes(2);
@@ -59,19 +59,19 @@ describe("LissajousScope", () => {
       <LissajousScope
         x={Float32Array.of(0, 0.4, 0, -0.4)}
         y={Float32Array.of(0.4, 0, -0.4, 0)}
-        title="Послойная фаза"
+        title="Layered phase"
         layers={[
           {
             x: Float32Array.of(0, 0.8, 0, -0.8),
             y: Float32Array.of(0.8, 0, -0.8, 0),
             color: "#ff595e",
-            label: "До",
+            label: "C",
           },
           {
             x: Float32Array.of(0, 0.6, 0, -0.6),
             y: Float32Array.of(-0.6, 0, 0.6, 0),
             color: "#8ac926",
-            label: "Ми",
+            label: "E",
             opacity: 0.65,
             lineWidth: 2,
           },
@@ -80,11 +80,11 @@ describe("LissajousScope", () => {
     );
 
     const scope = screen.getByRole("img", {
-      name: /Послойная фаза.*Цветных слоёв: 2 \(До, Ми\)/,
+      name: /Layered phase.*Colored layers: 2 \(C, E\)/,
     });
 
-    expect(scope).toHaveAccessibleName(/Основная кривая построена по 4 парам/);
-    expect(scope).toHaveTextContent("Цветных слоёв: 2 (До, Ми)");
+    expect(scope).toHaveAccessibleName(/The main curve uses 4 sample pairs/);
+    expect(scope).toHaveTextContent("Colored layers: 2 (C, E)");
     expect(requestAnimationFrame).toHaveBeenCalledOnce();
   });
 
@@ -118,11 +118,11 @@ describe("LissajousScope", () => {
         layers={layers}
         phaseSourceMode="notes"
         persistence={0.18}
-        title="Фазовый портрет"
+        title="Phase portrait"
       />,
     );
 
-    const phaseCanvas = screen.getByRole("img", { name: /Фазовый портрет/ });
+    const phaseCanvas = screen.getByRole("img", { name: /Phase portrait/ });
     expect(phaseCanvas).toHaveAttribute("data-phase-renderer", "lissajous");
     expect(phaseCanvas).toHaveAttribute("data-fractal-background", "0");
     expect(phaseCanvas).toHaveAttribute("data-phase-source-mode", "notes");
@@ -155,13 +155,13 @@ describe("LissajousScope", () => {
         layers={layers}
         phaseSourceMode="notes"
         persistence={0.18}
-        title="Фрактальный фазовый портрет"
+        title="Fractal phase portrait"
         backgroundLayer={<div data-testid="fractal-background" />}
       />,
     );
 
     const phaseCanvasWithFractal = screen.getByRole("img", {
-      name: /Фрактальный фазовый портрет/,
+      name: /Fractal phase portrait/,
     });
     expect(phaseCanvasWithFractal).toBe(phaseCanvas);
     expect(phaseCanvasWithFractal).toHaveAttribute(
@@ -208,7 +208,7 @@ describe("LissajousScope", () => {
       />,
     );
 
-    const phaseCanvas = screen.getByRole("img", { name: /Фазовый портрет/ });
+    const phaseCanvas = screen.getByRole("img", { name: /Phase portrait/ });
     expect(phaseCanvas).toHaveAttribute("data-phase-detail", "0.500");
     expect(phaseCanvas).toHaveAttribute("data-phase-speed", "0.250");
     expect(phaseCanvas).toHaveAttribute("data-phase-response-ms", "2268");
@@ -268,7 +268,7 @@ describe("LissajousScope", () => {
     );
 
     const phaseCanvas = screen.getByRole("img", {
-      name: /Фазовый портрет/,
+      name: /Phase portrait/,
     });
     expect(phaseCanvas).toHaveAttribute("data-phase-preset", "spatial");
     expect(phaseCanvas).toHaveAttribute(
@@ -328,7 +328,7 @@ describe("LissajousScope", () => {
     );
 
     const phaseCanvas = screen.getByRole("img", {
-      name: /Фазовый портрет/,
+      name: /Phase portrait/,
     });
     const firstAxes = phaseCanvas.getAttribute("data-phase-layer-axes");
     const firstTravelAxes = phaseCanvas.getAttribute(
@@ -461,7 +461,7 @@ describe("LissajousScope", () => {
     );
 
     const phaseCanvas = screen.getByRole("img", {
-      name: /Фазовый портрет/,
+      name: /Phase portrait/,
     });
     expect(phaseCanvas).toHaveAttribute("data-phase-trace-count", "2");
     expect(phaseCanvas).toHaveAttribute("data-phase-energy", "0.700");
@@ -561,7 +561,7 @@ describe("LissajousScope", () => {
       />,
     );
 
-    const phaseCanvas = screen.getByRole("img", { name: /Фазовый портрет/ });
+    const phaseCanvas = screen.getByRole("img", { name: /Phase portrait/ });
     expect(phaseCanvas).toHaveAttribute("data-phase-line-width", "1.500");
     expect(phaseCanvas).toHaveAttribute("data-phase-glow", "2.000");
     expect(hasStrokeWidth(7.2)).toBe(true);
@@ -645,7 +645,7 @@ describe("LissajousScope", () => {
       />,
     );
 
-    const phaseCanvas = screen.getByRole("img", { name: /Фазовый портрет/ });
+    const phaseCanvas = screen.getByRole("img", { name: /Phase portrait/ });
     expect(phaseCanvas).toHaveAttribute("data-phase-path", "open");
     expect(phaseCanvas).toHaveAttribute("data-phase-curve", "cardinal");
     expect(phaseCanvas).toHaveAttribute(

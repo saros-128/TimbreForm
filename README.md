@@ -27,7 +27,7 @@ Compose project: `phase-visualizer`. Only `127.0.0.1:8093` is published. The ori
 - Lines, cage and surface; automatic, high and economy scene quality.
 - Detail, smoothing speed, width, blur, glow, opacity, brightness, trails; spatial depth, tilt, rotation, bend, axis diversity and layer movement / sound response.
 - Fractal background, morph transition time, brightness, zoom, travel direction, speed, audio response, morph, detail motion, density and symmetry.
-- Up to sixteen local images, thumbnails, removal, clear, enable, beat/tempo/time modes and all image morph controls. Images stay in browser memory and are released on removal/unmount.
+- Up to sixteen local images, thumbnails, removal, clear, enable, beat/energy/time modes and all image morph controls. Images stay in browser memory and are released on removal/unmount.
 - Fullscreen and idle auto-hide toolbar, including settings and exit controls.
 
 Phase uses the live waveform and tracked notes independently of HarmonicVis Collect/history/freeze. Those unrelated panels, notation lessons, chord exploration and fretboard were omitted. Note names remain only as the existing colored layer legend. Settings and uploaded images have the original session-only lifetime; a different localhost origin cannot inherit another application's browser state.

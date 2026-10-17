@@ -6,8 +6,8 @@ import {
 } from "./ImageMorphBackdrop";
 
 const sources: ImageMorphSource[] = [
-  { id: "one", name: "Первое", url: "blob:first" },
-  { id: "two", name: "Второе", url: "blob:second" },
+  { id: "one", name: "First", url: "blob:first" },
+  { id: "two", name: "Second", url: "blob:second" },
 ];
 
 function fixedBounds(width = 640, height = 360): DOMRect {
@@ -132,7 +132,7 @@ describe("ImageMorphBackdrop", () => {
     );
     const mixedSources = [
       sources[0],
-      { id: "broken", name: "Ошибка", url: "blob:broken" },
+      { id: "broken", name: "Error", url: "blob:broken" },
     ];
 
     const view = render(

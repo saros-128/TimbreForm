@@ -1613,7 +1613,7 @@ export function LissajousScope({
   };
 
   const resolvedTitle =
-    title ?? (mode === "harmonic" ? "Гармоническая фигура" : "Фазовый портрет");
+    title ?? (mode === "harmonic" ? "Harmonic figure" : "Phase portrait");
   const pointCount = Math.min(x.length, y.length);
   const visibleLayers = layers.filter(
     (layer) => Math.min(layer.x.length, layer.y.length) >= 2,
@@ -1691,7 +1691,7 @@ export function LissajousScope({
     .filter((label): label is string => Boolean(label));
   const description =
     ariaLabel ??
-    `${resolvedTitle}. Основная кривая построена по ${pointCount} парам отсчётов. Цветных слоёв: ${visibleLayers.length}${layerLabels.length > 0 ? ` (${layerLabels.join(", ")})` : ""}.`;
+    `${resolvedTitle}. The main curve uses ${pointCount} sample pairs. Colored layers: ${visibleLayers.length}${layerLabels.length > 0 ? ` (${layerLabels.join(", ")})` : ""}.`;
 
   const drawRef = useRef<() => void>(() => undefined);
   drawRef.current = () => {

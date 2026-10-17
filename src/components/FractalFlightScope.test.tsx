@@ -59,20 +59,20 @@ describe("FractalFlightScope", () => {
       <FractalFlightScope
         x={traceX}
         y={traceY}
-        title="Тестовый полёт"
+        title="Test flight"
         meta="TEST FLIGHT"
-        ariaLabel="Фрактальная камера тестового сигнала"
+        ariaLabel="Fractal camera for the test signal"
         animate={false}
       />,
     );
 
     expect(
       screen.getByRole("img", {
-        name: "Тестовый полёт",
+        name: "Test flight",
       }),
     ).toBeInTheDocument();
     expect(
-      screen.getByText("Фрактальная камера тестового сигнала"),
+      screen.getByText("Fractal camera for the test signal"),
     ).toBeInTheDocument();
     expect(screen.getByText("TEST FLIGHT")).toBeInTheDocument();
 
@@ -109,7 +109,7 @@ describe("FractalFlightScope", () => {
       />,
     );
 
-    const scope = screen.getByRole("img", { name: "Фрактальный полёт" });
+    const scope = screen.getByRole("img", { name: "Fractal flight" });
     expect(spies.createRadialGradient).toHaveBeenCalled();
     expect(spies.fillRect).toHaveBeenCalled();
     expect(spies.stroke).toHaveBeenCalled();
@@ -157,7 +157,7 @@ describe("FractalFlightScope", () => {
       />,
     );
 
-    const scope = screen.getByRole("img", { name: "Фрактальный полёт" });
+    const scope = screen.getByRole("img", { name: "Fractal flight" });
     expect(scope).toHaveAttribute("data-fractal-brightness", "2.400");
     expect(scope).toHaveAttribute("data-fractal-zoom-offset", "0.500");
     expect(scope).toHaveAttribute("data-fractal-base-log-zoom", "1.600");
@@ -197,7 +197,7 @@ describe("FractalFlightScope", () => {
       />,
     );
 
-    const scope = screen.getByRole("img", { name: "Фрактальный полёт" });
+    const scope = screen.getByRole("img", { name: "Fractal flight" });
     expect(scope).toHaveAttribute("data-fractal-brightness", "3.000");
     expect(scope).toHaveAttribute("data-fractal-travel-mode", "recede");
     expect(scope).toHaveAttribute("data-fractal-sound-response", "0.000");
@@ -261,7 +261,7 @@ describe("FractalFlightScope", () => {
       />,
     );
     const approachScope = screen.getByRole("img", {
-      name: "Фрактальный полёт",
+      name: "Fractal flight",
     });
     act(() => frames.shift()?.(1_000));
     const approachStart = Number(
@@ -294,7 +294,7 @@ describe("FractalFlightScope", () => {
       />,
     );
     const recedeScope = screen.getByRole("img", {
-      name: "Фрактальный полёт",
+      name: "Fractal flight",
     });
     act(() => frames.shift()?.(2_000));
     const recedeStart = Number(
@@ -332,7 +332,7 @@ describe("FractalFlightScope", () => {
         animate={false}
       />,
     );
-    const scope = screen.getByRole("img", { name: "Фрактальный полёт" });
+    const scope = screen.getByRole("img", { name: "Fractal flight" });
     expect(scope).toHaveAttribute("data-fixed-phase-source-revision", "1");
 
     const drawsBefore = spies.clearRect.mock.calls.length;
@@ -401,7 +401,7 @@ describe("FractalFlightScope", () => {
         animate={false}
       />,
     );
-    const scope = screen.getByRole("img", { name: "Фрактальный полёт" });
+    const scope = screen.getByRole("img", { name: "Fractal flight" });
     expect(scope).toHaveAttribute("data-phase-source-mode", "notes");
     expect(scope).toHaveAttribute("data-phase-trace-count", "2");
     expect(scope).toHaveAttribute("data-phase-note-count", "2");
@@ -508,7 +508,7 @@ describe("FractalFlightScope", () => {
       />,
     );
 
-    const scope = screen.getByRole("img", { name: "Фрактальный полёт" });
+    const scope = screen.getByRole("img", { name: "Fractal flight" });
     expect(scope).toHaveAttribute(
       "data-fractal-variant",
       "continuous-newton-flow",
@@ -551,7 +551,7 @@ describe("FractalFlightScope", () => {
         animate={false}
       />,
     );
-    const scope = screen.getByRole("img", { name: "Фрактальный полёт" });
+    const scope = screen.getByRole("img", { name: "Fractal flight" });
     expect(scope).toHaveAttribute("data-fixed-phase-source-active", "1");
 
     view.rerender(

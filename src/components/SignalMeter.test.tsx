@@ -10,7 +10,7 @@ describe("SignalMeter", () => {
     expect(view.container.querySelector(".signal-level")).toHaveClass("clipping");
     expect(view.container.querySelector(".signal")).toHaveAttribute(
       "title",
-      expect.stringContaining("Входной пик -0.5 dBFS"),
+      expect.stringContaining("Input peak -0.5 dBFS"),
     );
 
     view.rerender(

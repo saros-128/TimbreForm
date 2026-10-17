@@ -93,14 +93,14 @@ function copyWaveform(snapshot: SpectrumInput): WaveformFrame {
 function describeAudioError(error: unknown): string {
   if (error instanceof DOMException) {
     if (error.name === "NotAllowedError") {
-      return "Доступ к аудиовходу запрещён. Разрешите микрофон для этого сайта.";
+      return "Audio input access was denied. Allow microphone access for this site.";
     }
-    if (error.name === "NotFoundError") return "Аудиовход не найден.";
+    if (error.name === "NotFoundError") return "No audio input device found.";
     if (error.name === "NotReadableError") {
-      return "Аудиовход занят или недоступен. Проверьте аудиокарту и Ableton.";
+      return "Audio input is busy or unavailable. Check your audio interface and Ableton.";
     }
   }
-  return error instanceof Error ? error.message : "Не удалось открыть аудиовход.";
+  return error instanceof Error ? error.message : "Could not open audio input.";
 }
 
 export function useHarmonicAudio(
@@ -373,8 +373,8 @@ export function useHarmonicAudio(
           onsetPitch: null,
           error:
             reason === "muted"
-              ? "Аудиовход перестал передавать данные. Проверьте подключение аудиокарты."
-              : "Аудиовход отключён. Выберите устройство и откройте его снова.",
+              ? "Audio input stopped sending data. Check your audio interface connection."
+              : "Audio input disconnected. Select a device and open it again.",
         }));
       });
     }

@@ -453,7 +453,7 @@ const signalFrame = audio.frame;
       {
         ...phaseAxes,
         color: "#7893a4",
-        label: "общий сигнал",
+        label: "mixed signal",
         opacity: 0.12,
         lineWidth: 0.65,
       },
@@ -473,14 +473,14 @@ const signalFrame = audio.frame;
   const phaseLayerCount = coloredPhaseLayers.length;
   const phaseLayerUnit =
     phaseLayerCount === 1
-      ? "СЛОЙ"
+      ? "LAYER"
       : phaseLayerCount >= 2 && phaseLayerCount <= 4
-        ? "СЛОЯ"
-        : "СЛОЁВ";
+        ? "LAYERS"
+        : "LAYERS";
   const phaseBaseMeta =
     phaseDisplayMode === "signal"
       ? phaseFrequency
-        ? `${phaseFrequency.toFixed(1)} Гц`
+        ? `${phaseFrequency.toFixed(1)} Hz`
         : "LIVE"
       : `${phaseLayerCount} ${phaseLayerUnit}`;
   const phasePresetMeta =
@@ -496,19 +496,19 @@ const signalFrame = audio.frame;
   const phaseTitle =
     fractalEnabled && imageMorphActive
       ? phaseVisualPreset === "spatial"
-        ? "Фрактальный пространственный медиапортрет"
-        : "Фрактальный фазовый медиапортрет"
+        ? "Fractal spatial media portrait"
+        : "Fractal phase media portrait"
       : fractalEnabled
         ? phaseVisualPreset === "spatial"
-          ? "Фрактальный пространственный портрет"
-          : "Фрактальный фазовый портрет"
+          ? "Fractal spatial portrait"
+          : "Fractal phase portrait"
         : imageMorphActive
           ? phaseVisualPreset === "spatial"
-            ? "Пространственный медиапортрет"
-            : "Фазовый медиапортрет"
+            ? "Spatial media portrait"
+            : "Phase media portrait"
           : phaseVisualPreset === "spatial"
-            ? "Пространственный фазовый портрет"
-            : "Фазовый портрет";
+            ? "Spatial phase portrait"
+            : "Phase portrait";
   const phaseBasePersistence =
     phaseDisplayMode === "signal"
       ? 0.82
@@ -536,12 +536,12 @@ const signalFrame = audio.frame;
 return <div className="app-shell phase-app"><header className="topbar"><div className="brand"><span><strong>TimbreForm</strong><small>Audio Visualizer</small></span></div>
         <div className="source-controls">
           <select
-            aria-label="Устройство ввода"
+            aria-label="Input device"
             value={selectedDevice}
             onChange={(event) => changeInputDevice(event.target.value)}
             disabled={audio.status === "requesting"}
           >
-            <option value="">Системный аудиовход</option>
+            <option value="">System audio input</option>
             {audio.devices.map((device) => (
               <option key={device.deviceId} value={device.deviceId}>
                 {device.label}
@@ -550,7 +550,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
           </select>
           {audio.status === "running" ? (
             <button className="button stop" onClick={() => void audio.stop()}>
-              <span className="status-dot active" /> Стоп
+              <span className="status-dot active" /> Stop
             </button>
           ) : (
             <button
@@ -559,7 +559,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
               disabled={!audio.supported || audio.status === "requesting"}
             >
               <span className="status-dot" />
-              {audio.status === "requesting" ? "Подключение…" : "Открыть вход"}
+              {audio.status === "requesting" ? "Connecting…" : "Open input"}
             </button>
           )}
         </div>
@@ -572,12 +572,12 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
       </header>
 
       {audio.error && <div className="error-banner">{audio.error}</div>}
-<main><section className="control-strip" aria-label="Аудиовход"><label>Обработка входа <select aria-label="Обработка входа" value={inputProfile} onChange={e=>setInputProfile(e.target.value as InputProfile)}><option value="clean">Чистый DI</option><option value="microphone">Микрофон β</option></select></label>
-<label>Реакция Live <select aria-label="Реакция Live" value={liveProfile} onChange={e=>setLiveProfile(e.target.value as LiveProfile)}><option value="stable">Стабильно</option><option value="responsive">Быстро β</option></select></label>
+<main><section className="control-strip" aria-label="Audio input"><label>Input processing <select aria-label="Input processing" value={inputProfile} onChange={e=>setInputProfile(e.target.value as InputProfile)}><option value="clean">Clean DI</option><option value="microphone">Microphone β</option></select></label>
+<label>Live response <select aria-label="Live response" value={liveProfile} onChange={e=>setLiveProfile(e.target.value as LiveProfile)}><option value="stable">Stable</option><option value="responsive">Responsive β</option></select></label>
           <span className="strip-separator" />
 
           <label className="compact-field">
-            Основных нот
+            Fundamentals
             <select
               value={maxPolyphony}
               onChange={(event) => setMaxPolyphony(Number(event.target.value))}
@@ -591,7 +591,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
           </label>
 
           <label className="range-field">
-            Чувствительность
+            Sensitivity
             <input
               type="range"
               min="10"
@@ -615,7 +615,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
           </label>
 
           <div className="demo-menu">
-            <span>Демо</span>
+            <span>Demo</span>
             {DEMO_CHORDS.map((demo) => (
               <button key={demo.label} onClick={() => startChordDemo(demo.midis)}>
                 {demo.label}
@@ -629,13 +629,13 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                   <div
                     className="phase-geometry-controls"
                     role="group"
-                    aria-label="Геометрия сцены"
+                    aria-label="Scene geometry"
                   >
                     {(
                       [
-                        ["lines", "Линии"],
-                        ["cage", "Каркас"],
-                        ["surface", "Поверхность"],
+                        ["lines", "Lines"],
+                        ["cage", "Cage"],
+                        ["surface", "Surface"],
                       ] as const
                     ).map(([value, label]) => (
                       <button
@@ -647,24 +647,24 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                       </button>
                     ))}
                     <label>
-                      Качество{" "}
+                      Quality{" "}
                       <select
-                        aria-label="Качество сцены"
+                        aria-label="Scene quality"
                         value={sceneQuality}
                         onChange={(e) =>
                           setSceneQuality(e.target.value as SceneQuality)
                         }
                       >
-                        <option value="auto">Авто</option>
-                        <option value="high">Высокое</option>
-                        <option value="economy">Экономное</option>
+                        <option value="auto">Auto</option>
+                        <option value="high">High</option>
+                        <option value="economy">Economy</option>
                       </select>
                     </label>
                     {fractalEnabled && (
                       <label>
-                        Переход формы{" "}
+                        Shape transition{" "}
                         <input
-                          aria-label="Время перехода формы"
+                          aria-label="Shape transition time"
                           type="range"
                           min="0.3"
                           max="12"
@@ -672,7 +672,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                           value={fractalMorphSeconds}
                           onChange={(e) => setFractalMorphSeconds(Number(e.target.value))}
                         />
-                        {fractalMorphSeconds.toFixed(1)} с
+                        {fractalMorphSeconds.toFixed(1)} s
                       </label>
                     )}
                   </div>
@@ -773,31 +773,31 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                     }
                     ariaLabel={`${
                       phaseDisplayMode === "signal"
-                        ? "Фазовый портрет монофонического входного сигнала с задержанной копией по оси Y"
+                        ? "Phase portrait of the mono input signal with a delayed copy on the Y axis"
                         : `${
                             phaseDisplayMode === "hybrid"
-                              ? "Гибридный фазовый портрет общего сигнала и"
-                              : "Фазовый портрет"
-                          } приближённых спектральных слоёв нот: ${
-                            phaseLayerNames.join(", ") || "слои пока не выделены"
+                              ? "Hybrid phase portrait of the mixed signal and"
+                              : "Phase portrait"
+                          } approximate spectral note layers: ${
+                            phaseLayerNames.join(", ") || "no layers detected yet"
                           }`
                     }${
                       fractalEnabled
-                        ? ". Фрактал работает только как непрерывно меняющийся фон"
+                        ? ". The fractal is a continuously evolving background"
                         : ""
                     }${
                       phaseVisualPreset === "spatial"
-                        ? ". Пространственный пресет изгибает слои в трёх измерениях и движет их по независимым осям"
+                        ? ". The spatial preset bends layers in three dimensions and moves them around independent axes"
                         : ""
                     }${
                       imageMorphActive
-                        ? ". Загруженные изображения плавно морфятся от ритма и энергии звука"
+                        ? ". Uploaded images morph smoothly with audio rhythm and energy"
                         : ""
                     }`}
                   />
                 </div>
               )}
-{!phaseHasContent&&<div className="empty-overlay" role="status"><strong>{audio.status==='running'?'Ожидание сигнала':'Подключите аудиовход'}</strong><span>Или запустите демо</span></div>}
+{!phaseHasContent&&<div className="empty-overlay" role="status"><strong>{audio.status==='running'?'Waiting for signal':'Connect audio input'}</strong><span>Or start a demo</span></div>}
               {showsPhasePortrait && phaseFullscreen && (
                 <div
                   className={`phase-fullscreen-controls${
@@ -806,7 +806,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                       : ""
                   }`}
                   role="toolbar"
-                  aria-label="Управление полноэкранным портретом"
+                  aria-label="Fullscreen portrait controls"
                   aria-hidden={
                     !(phaseFullscreenControlsVisible || phaseControlsOpen)
                   }
@@ -814,7 +814,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                 >
                   <button
                     type="button"
-                    aria-label="Настройки полноэкранного портрета"
+                    aria-label="Fullscreen portrait settings"
                     aria-expanded={phaseControlsOpen}
                     aria-controls="phase-visual-settings"
                     onClick={() => setPhaseControlsOpen((open) => !open)}
@@ -823,7 +823,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                   </button>
                   <button
                     type="button"
-                    aria-label="Выйти из полноэкранного режима"
+                    aria-label="Exit fullscreen"
                     onClick={exitPhaseFullscreen}
                   >
                     <span aria-hidden="true">×</span>
@@ -834,30 +834,30 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                 <section
                   id="phase-visual-settings"
                   className="phase-visual-settings"
-                  aria-label="Настройка изображения"
+                  aria-label="Visual settings"
                 >
                   <div className="phase-visual-settings-heading">
                     <div>
-                      <strong>Настройка изображения</strong>
+                      <strong>Visual settings</strong>
                       <span>
                         {phaseVisualPreset === "classic"
-                          ? "Классика сохраняет текущий вид фазы"
-                          : "Пространство имеет собственные настройки"}
+                          ? "Classic preserves the current phase view"
+                          : "Spatial mode has independent settings"}
                       </span>
                     </div>
                     <div>
                       <button
                         type="button"
                         onClick={resetPhaseVisualControls}
-                        title="Сбросить только активный пресет"
+                        title="Reset only the active preset"
                       >
-                        Сбросить
+                        Reset
                       </button>
                       <button
                         type="button"
                         onClick={() => setPhaseControlsOpen(false)}
                       >
-                        Закрыть
+                        Close
                       </button>
                     </div>
                   </div>
@@ -865,7 +865,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                   <div
                     className="phase-preset-control is-settings"
                     role="group"
-                    aria-label="Пресет в настройках"
+                    aria-label="Settings preset"
                   >
                     <button
                       type="button"
@@ -875,8 +875,8 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                       aria-pressed={phaseVisualPreset === "classic"}
                       onClick={() => setPhaseVisualPreset("classic")}
                     >
-                      <strong>Классика</strong>
-                      <span>Текущий плоский портрет</span>
+                      <strong>Classic</strong>
+                      <span>Current flat portrait</span>
                     </button>
                     <button
                       type="button"
@@ -886,16 +886,16 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                       aria-pressed={phaseVisualPreset === "spatial"}
                       onClick={() => setPhaseVisualPreset("spatial")}
                     >
-                      <strong>Пространство</strong>
-                      <span>Объём, свои оси и изгиб</span>
+                      <strong>Spatial</strong>
+                      <span>Depth, independent axes and bend</span>
                     </button>
                   </div>
 
                   <div className="phase-visual-settings-grid">
                     <fieldset>
-                      <legend>Фаза</legend>
+                      <legend>Phase</legend>
                       <VisualRangeControl
-                        label="Детализация фазы"
+                        label="Phase detail"
                         value={phaseVisualControls.detail}
                         min={5}
                         onChange={(value) =>
@@ -903,19 +903,19 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                         }
                       />
                       <VisualRangeControl
-                        label="Скорость фазы"
+                        label="Phase speed"
                         value={phaseVisualControls.speed}
                         output={
                           phaseVisualControls.speed === 100
                             ? "realtime"
-                            : `~${(phaseSmoothingMs / 1_000).toFixed(1)} с`
+                            : `~${(phaseSmoothingMs / 1_000).toFixed(1)} s`
                         }
                         onChange={(value) =>
                           setPhaseVisualControl("speed", value)
                         }
                       />
                       <VisualRangeControl
-                        label="Толщина линий фазы"
+                        label="Phase line width"
                         value={phaseVisualControls.lineWidth}
                         min={50}
                         max={500}
@@ -927,7 +927,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                         }
                       />
                       <VisualRangeControl
-                        label="Blur фазы"
+                        label="Phase blur"
                         value={phaseVisualControls.blur}
                         output={`${(
                           (phaseVisualControls.blur / 100) * 8
@@ -937,7 +937,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                         }
                       />
                       <VisualRangeControl
-                        label="Glow фазы"
+                        label="Phase glow"
                         value={phaseVisualControls.glow}
                         max={400}
                         output={`${(phaseVisualControls.glow / 100).toFixed(
@@ -948,14 +948,14 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                         }
                       />
                       <VisualRangeControl
-                        label="Прозрачность фазы"
+                        label="Phase opacity"
                         value={phaseVisualControls.opacity}
                         onChange={(value) =>
                           setPhaseVisualControl("opacity", value)
                         }
                       />
                       <VisualRangeControl
-                        label="Яркость фазы"
+                        label="Phase brightness"
                         value={phaseVisualControls.phaseBrightness}
                         max={300}
                         output={`${(
@@ -966,7 +966,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                         }
                       />
                       <VisualRangeControl
-                        label="Шлейф фазы"
+                        label="Phase trail"
                         value={phaseVisualControls.trail}
                         onChange={(value) =>
                           setPhaseVisualControl("trail", value)
@@ -975,7 +975,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                       {phaseVisualPreset === "spatial" && (
                         <>
                           <VisualRangeControl
-                            label="Глубина пространства"
+                            label="Spatial depth"
                             value={phaseVisualControls.phaseDepth}
                             output={`${phaseDepth.toFixed(2)}×`}
                             onChange={(value) =>
@@ -983,7 +983,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                             }
                           />
                           <VisualRangeControl
-                            label="Наклон плоскости"
+                            label="Plane tilt"
                             value={phaseVisualControls.phaseTilt}
                             output={`${Math.round(phaseTilt * 60)}°`}
                             onChange={(value) =>
@@ -991,7 +991,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                             }
                           />
                           <VisualRangeControl
-                            label="Общее вращение сцены"
+                            label="Global scene rotation"
                             value={phaseVisualControls.phaseRotation}
                             output={`${phaseRotation.toFixed(2)}×`}
                             onChange={(value) =>
@@ -999,7 +999,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                             }
                           />
                           <VisualRangeControl
-                            label="Изгиб слоёв"
+                            label="Layer bend"
                             value={phaseVisualControls.phaseBend}
                             output={`${phaseBend.toFixed(2)}×`}
                             onChange={(value) =>
@@ -1007,7 +1007,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                             }
                           />
                           <VisualRangeControl
-                            label="Разброс осей"
+                            label="Axis spread"
                             value={phaseVisualControls.phaseAxisDiversity}
                             output={`${Math.round(phaseAxisDiversity * 100)}%`}
                             onChange={(value) =>
@@ -1015,7 +1015,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                             }
                           />
                           <VisualRangeControl
-                            label="Движение слоёв по своим осям"
+                            label="Independent layer movement"
                             value={phaseVisualControls.phaseLayerMotion}
                             max={400}
                             output={`${phaseLayerMotion.toFixed(2)}×`}
@@ -1024,7 +1024,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                             }
                           />
                           <VisualRangeControl
-                            label="Реакция скорости слоёв"
+                            label="Layer speed response"
                             value={phaseVisualControls.phaseLayerSoundResponse}
                             max={200}
                             output={`${phaseLayerSoundResponse.toFixed(2)}×`}
@@ -1041,11 +1041,11 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
 
                     <fieldset disabled={!fractalEnabled}>
                       <legend>
-                        Фрактал
-                        {!fractalEnabled && <span>включите фон</span>}
+                        Fractal
+                        {!fractalEnabled && <span>enable background</span>}
                       </legend>
                       <VisualRangeControl
-                        label="Яркость фрактала"
+                        label="Fractal brightness"
                         value={phaseVisualControls.fractalBrightness}
                         max={300}
                         output={`${(
@@ -1056,16 +1056,16 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                         }
                       />
                       <VisualRangeControl
-                        label="Приближение фрактала"
+                        label="Fractal zoom"
                         value={phaseVisualControls.fractalZoom}
                         output={
                           phaseVisualControls.fractalZoom === 50
-                            ? "нейтрально"
+                            ? "neutral"
                             : phaseVisualControls.fractalZoom > 50
-                              ? `ближе +${
+                              ? `closer +${
                                   (phaseVisualControls.fractalZoom - 50) * 2
                                 }%`
-                              : `дальше ${
+                              : `farther ${
                                   (50 - phaseVisualControls.fractalZoom) * 2
                                 }%`
                         }
@@ -1076,9 +1076,9 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                       <div
                         className="phase-fractal-travel-control"
                         role="group"
-                        aria-label="Движение фрактала"
+                        aria-label="Fractal movement"
                       >
-                        <span>Движение фрактала</span>
+                        <span>Fractal movement</span>
                         <div>
                           <button
                             type="button"
@@ -1088,7 +1088,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                             aria-pressed={fractalTravelMode === "approach"}
                             onClick={() => setFractalTravelMode("approach")}
                           >
-                            Приближение
+                            Approach
                           </button>
                           <button
                             type="button"
@@ -1098,7 +1098,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                             aria-pressed={fractalTravelMode === "recede"}
                             onClick={() => setFractalTravelMode("recede")}
                           >
-                            Отдаление
+                            Recede
                           </button>
                           <button
                             type="button"
@@ -1108,12 +1108,12 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                             aria-pressed={fractalTravelMode === "pulse"}
                             onClick={() => setFractalTravelMode("pulse")}
                           >
-                            Пульсация
+                            Pulse
                           </button>
                         </div>
                       </div>
                       <VisualRangeControl
-                        label="Скорость фрактала"
+                        label="Fractal speed"
                         value={phaseVisualControls.fractalSpeed}
                         max={200}
                         output={`${(
@@ -1124,7 +1124,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                         }
                       />
                       <VisualRangeControl
-                        label="Реакция на звук"
+                        label="Audio response"
                         value={phaseVisualControls.fractalSoundResponse}
                         max={200}
                         output={`${(
@@ -1135,37 +1135,37 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                         }
                       />
                       <VisualRangeControl
-                        label="Морфинг формы"
+                        label="Shape morphing"
                         value={phaseVisualControls.fractalMorph}
                         onChange={(value) =>
                           setPhaseVisualControl("fractalMorph", value)
                         }
                       />
                       <VisualRangeControl
-                        label="Пульсация деталей"
+                        label="Detail pulsation"
                         value={phaseVisualControls.fractalDetailMotion}
                         onChange={(value) =>
                           setPhaseVisualControl("fractalDetailMotion", value)
                         }
                       />
                       <VisualRangeControl
-                        label="Плотность узора"
+                        label="Pattern density"
                         value={phaseVisualControls.fractalDensity}
                         onChange={(value) =>
                           setPhaseVisualControl("fractalDensity", value)
                         }
                       />
                       <VisualRangeControl
-                        label="Лучевая симметрия"
+                        label="Radial symmetry"
                         value={phaseVisualControls.fractalSymmetry}
                         output={
                           phaseVisualControls.fractalSymmetry === 0
-                            ? "выкл."
+                            ? "off"
                             : `~${Math.round(
                                 2 +
                                   phaseVisualControls.fractalSymmetry *
                                     0.08,
-                              )} лучей`
+                              )} rays`
                         }
                         onChange={(value) =>
                           setPhaseVisualControl("fractalSymmetry", value)
@@ -1175,8 +1175,8 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
 
                     <fieldset className="phase-image-settings">
                       <legend>
-                        Изображения
-                        <span>{imageMorphSources.length} загружено</span>
+                        Images
+                        <span>{imageMorphSources.length} loaded</span>
                       </legend>
                       <div className="phase-image-actions">
                         <label
@@ -1195,14 +1195,14 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                               imageMorphSources.length >=
                               MAX_IMAGE_MORPH_SOURCES
                             }
-                            aria-label="Загрузить изображения"
+                            aria-label="Upload images"
                             onChange={addImageMorphSources}
                           />
                           <span>
                             {imageMorphSources.length >=
                             MAX_IMAGE_MORPH_SOURCES
-                              ? "Лимит 16 файлов"
-                              : "Добавить изображения"}
+                              ? "16-file limit"
+                              : "Add images"}
                           </span>
                         </label>
                         <label className="toggle phase-image-toggle">
@@ -1214,25 +1214,24 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                               setImageMorphEnabled(event.target.checked)
                             }
                           />
-                          <span /> Показывать
+                          <span /> Show
                         </label>
                         <button
                           type="button"
                           disabled={imageMorphSources.length === 0}
                           onClick={clearImageMorphSources}
                         >
-                          Очистить
+                          Clear
                         </button>
                       </div>
                       <p className="phase-image-privacy">
-                        До 16 файлов. Они остаются в этом браузере и никуда не
-                        отправляются.
+                        Up to 16 files. They stay in this browser and are never uploaded.
                       </p>
 
                       {imageMorphSources.length > 0 && (
                         <div
                           className="phase-image-thumbnails"
-                          aria-label="Загруженные изображения"
+                          aria-label="Uploaded images"
                         >
                           {imageMorphSources.map((source) => (
                             <figure key={source.id}>
@@ -1242,7 +1241,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                               </figcaption>
                               <button
                                 type="button"
-                                aria-label={`Удалить изображение ${source.name}`}
+                                aria-label={`Remove image ${source.name}`}
                                 onClick={() =>
                                   removeImageMorphSource(source.id)
                                 }
@@ -1257,15 +1256,15 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                       <div
                         className="phase-fractal-travel-control phase-image-mode-control"
                         role="group"
-                        aria-label="Смена изображений"
+                        aria-label="Image switching"
                       >
-                        <span>Когда менять</span>
+                        <span>Switch on</span>
                         <div>
                           {(
                             [
-                              ["beat", "Ритм"],
-                              ["energy", "Энергия"],
-                              ["time", "Время"],
+                              ["beat", "Beat"],
+                              ["energy", "Energy"],
+                              ["time", "Time"],
                             ] as const
                           ).map(([mode, label]) => (
                             <button
@@ -1285,7 +1284,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                       </div>
                       <div className="phase-image-control-grid">
                         <VisualRangeControl
-                          label="Длительность перехода"
+                          label="Transition duration"
                           value={imageMorphControls.transitionMs}
                           min={200}
                           max={5_000}
@@ -1293,13 +1292,13 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                           disabled={imageMorphSources.length < 2}
                           output={`${(
                             imageMorphControls.transitionMs / 1_000
-                          ).toFixed(1)} с`}
+                          ).toFixed(1)} s`}
                           onChange={(value) =>
                             setImageMorphControl("transitionMs", value)
                           }
                         />
                         <VisualRangeControl
-                          label="Частота смены"
+                          label="Change rate"
                           value={imageMorphControls.changeRate}
                           min={25}
                           max={300}
@@ -1312,7 +1311,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                           }
                         />
                         <VisualRangeControl
-                          label="Деформация перехода"
+                          label="Transition deformation"
                           value={imageMorphControls.morph}
                           max={200}
                           disabled={imageMorphSources.length === 0}
@@ -1324,7 +1323,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                           }
                         />
                         <VisualRangeControl
-                          label="Прозрачность изображений"
+                          label="Image opacity"
                           value={imageMorphControls.opacity}
                           disabled={imageMorphSources.length === 0}
                           onChange={(value) =>
@@ -1332,7 +1331,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                           }
                         />
                         <VisualRangeControl
-                          label="Яркость изображений"
+                          label="Image brightness"
                           value={imageMorphControls.brightness}
                           max={300}
                           disabled={imageMorphSources.length === 0}
@@ -1344,7 +1343,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                           }
                         />
                         <VisualRangeControl
-                          label="Реакция деформации на звук"
+                          label="Audio deformation response"
                           value={imageMorphControls.phaseInfluence}
                           max={200}
                           disabled={imageMorphSources.length === 0}
@@ -1364,7 +1363,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                   <div
                     className="phase-preset-control is-compact"
                     role="group"
-                    aria-label="Пресет фазового портрета"
+                    aria-label="Phase portrait preset"
                   >
                     <button
                       type="button"
@@ -1374,7 +1373,7 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                       aria-pressed={phaseVisualPreset === "classic"}
                       onClick={() => setPhaseVisualPreset("classic")}
                     >
-                      Классика
+                      Classic
                     </button>
                     <button
                       type="button"
@@ -1384,35 +1383,35 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                       aria-pressed={phaseVisualPreset === "spatial"}
                       onClick={() => setPhaseVisualPreset("spatial")}
                     >
-                      Пространство
+                      Spatial
                     </button>
                   </div>
                   <div
                     className="phase-display-control"
                     role="group"
-                    aria-label="Слои фазового портрета"
+                    aria-label="Phase portrait layers"
                   >
                     <button
                       className={phaseDisplayMode === "signal" ? "active" : ""}
                       aria-pressed={phaseDisplayMode === "signal"}
                       onClick={() => setPhaseDisplayMode("signal")}
                     >
-                      Сумма
+                      Sum
                     </button>
                     <button
                       className={phaseDisplayMode === "notes" ? "active" : ""}
                       aria-pressed={phaseDisplayMode === "notes"}
                       onClick={() => setPhaseDisplayMode("notes")}
-                      title="Приблизительное спектральное разделение, не физические струны"
+                      title="Approximate spectral separation, not isolated physical strings"
                     >
-                      Ноты β
+                      Notes β
                     </button>
                     <button
                       className={phaseDisplayMode === "hybrid" ? "active" : ""}
                       aria-pressed={phaseDisplayMode === "hybrid"}
                       onClick={() => setPhaseDisplayMode("hybrid")}
                     >
-                      Гибрид
+                      Hybrid
                     </button>
                   </div>
                   <button
@@ -1420,9 +1419,9 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                     className={`phase-fractal-toggle${fractalEnabled ? " active" : ""}`}
                     aria-pressed={fractalEnabled}
                     onClick={() => setFractalEnabled((enabled) => !enabled)}
-                    title="Показать непрерывно меняющийся фрактал за выбранными фазовыми слоями"
+                    title="Show a continuously evolving fractal behind the selected phase layers"
                   >
-                    Фрактал
+                    Fractal
                   </button>
                   <button
                     type="button"
@@ -1436,11 +1435,11 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                     }
                     title={
                       imageMorphSources.length === 0
-                        ? "Добавьте изображения в настройках"
-                        : "Показать морфинг загруженных изображений"
+                        ? "Add images in settings"
+                        : "Show morphing of uploaded images"
                     }
                   >
-                    Изображения · {imageMorphSources.length}
+                    Images · {imageMorphSources.length}
                   </button>
                   <button
                     type="button"
@@ -1448,31 +1447,31 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                     aria-expanded={phaseControlsOpen}
                     aria-controls="phase-visual-settings"
                     onClick={() => setPhaseControlsOpen((open) => !open)}
-                    title="Настроить плотность, движение и соотношение фазы с фракталом"
+                    title="Adjust density, movement and the balance between phase and fractal"
                   >
-                    Настроить
+                    Settings
                   </button>
                   <button
                     type="button"
                     className="phase-fullscreen-toggle"
                     onClick={enterPhaseFullscreen}
-                    title="Развернуть фазовый портрет на весь экран"
+                    title="Show the phase portrait in fullscreen"
                   >
-                    Полный экран
+                    Fullscreen
                   </button>
                   {phaseDisplayMode !== "signal" && (
                     <div
                       className="phase-note-legend"
-                      aria-label="Цветные нотные слои"
+                      aria-label="Colored note layers"
                     >
                       {notePhaseLayers.map((layer) => {
                         const layerColor = pitchColor(layer.pitchClass);
                         return (
                           <span
                             key={layer.pitchClass}
-                            title={`${layer.frequency.toFixed(1)} Гц · ${layer.partialCount} частичных${
+                            title={`${layer.frequency.toFixed(1)} Hz · ${layer.partialCount} partials${
                               layer.ambiguousPartials > 0
-                                ? ` · ${layer.ambiguousPartials} общих`
+                                ? ` · ${layer.ambiguousPartials} shared`
                                 : ""
                             }`}
                           >
@@ -1486,24 +1485,24 @@ return <div className="app-shell phase-app"><header className="topbar"><div clas
                           </span>
                         );
                       })}
-                      {notePhaseLayers.length === 0 && <span>жду ноты</span>}
+                      {notePhaseLayers.length === 0 && <span>waiting for notes</span>}
                     </div>
                   )}
                   {fractalEnabled || imageMorphActive ? (
                     <span
                       className="scope-method"
-                      title="Фаза, фрактал и изображения сохраняют независимую детализацию и реагируют на один звуковой поток"
+                      title="Phase, fractal and images keep independent detail controls and respond to the same audio stream"
                     >
                       {fractalEnabled && imageMorphActive
-                        ? "фазы + фрактал + изображения"
+                        ? "phase + fractal + images"
                         : fractalEnabled
-                          ? "фазы + непрерывный фрактал"
-                          : "фазы + морфинг изображений"}
+                          ? "phase + continuous fractal"
+                          : "phase + image morphing"}
                     </span>
                   ) : (
                     <span
                       className="scope-method"
-                      title="τ выбирается как четверть периода распознанной основной частоты"
+                      title="τ is one quarter of the detected fundamental period"
                     >
                       X=s(t) · Y=s(t−τ)
                     </span>

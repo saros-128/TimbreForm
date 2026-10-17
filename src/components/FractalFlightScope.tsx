@@ -837,7 +837,7 @@ export function FractalFlightScope({
   notes = [],
   frameId,
   intensity = 0,
-  title = "Фрактальный полёт",
+  title = "Fractal flight",
   meta = "FLIGHT β",
   ariaLabel,
   className,
@@ -1588,7 +1588,7 @@ export function FractalFlightScope({
 
   const description =
     ariaLabel ??
-    `${title}. Выбранные живые фазовые контуры непрерывно меняют форму в одной неподвижной плоскости; фрактал плавно меняет форму, число деталей, симметрию, масштаб и рисунок от распознанных нот и энергии сигнала.`;
+    `${title}. Selected live phase contours continuously change shape in a fixed plane; detected notes and signal energy smoothly change the fractal shape, detail, symmetry, scale and pattern.`;
 
   if (backgroundOnly) {
     return (

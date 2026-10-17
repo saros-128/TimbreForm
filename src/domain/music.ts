@@ -100,29 +100,29 @@ export interface ChordDefinition {
  * IDs are deliberately independent from localized names and rendered symbols.
  */
 export const CHORD_DEFINITIONS = [
-  { id: "power-5", intervals: [0, 7], symbol: "5", name: "пауэр-аккорд", quality: "power" },
+  { id: "power-5", intervals: [0, 7], symbol: "5", name: "power chord", quality: "power" },
   { id: "sus-2", intervals: [0, 2, 7], symbol: "sus2", name: "sus2", quality: "suspended" },
-  { id: "minor-triad", intervals: [0, 3, 7], symbol: "m", name: "минор", quality: "minor" },
-  { id: "major-triad", intervals: [0, 4, 7], symbol: "", name: "мажор", quality: "major" },
+  { id: "minor-triad", intervals: [0, 3, 7], symbol: "m", name: "minor", quality: "minor" },
+  { id: "major-triad", intervals: [0, 4, 7], symbol: "", name: "major", quality: "major" },
   { id: "sus-4", intervals: [0, 5, 7], symbol: "sus4", name: "sus4", quality: "suspended" },
-  { id: "diminished-triad", intervals: [0, 3, 6], symbol: "dim", name: "уменьшённое трезвучие", quality: "diminished" },
-  { id: "augmented-triad", intervals: [0, 4, 8], symbol: "+", name: "увеличенное трезвучие", quality: "augmented" },
-  { id: "major-6", intervals: [0, 4, 7, 9], symbol: "6", name: "мажор с добавленной секстой", quality: "major" },
-  { id: "minor-6", intervals: [0, 3, 7, 9], symbol: "m6", name: "минор с добавленной секстой", quality: "minor" },
-  { id: "dominant-7", intervals: [0, 4, 7, 10], symbol: "7", name: "доминантсептаккорд", quality: "dominant" },
-  { id: "major-7", intervals: [0, 4, 7, 11], symbol: "maj7", name: "большой мажорный септаккорд", quality: "major" },
-  { id: "minor-7", intervals: [0, 3, 7, 10], symbol: "m7", name: "малый минорный септаккорд", quality: "minor" },
-  { id: "minor-major-7", intervals: [0, 3, 7, 11], symbol: "m(maj7)", name: "минор с большой септимой", quality: "minor" },
-  { id: "half-diminished-7", intervals: [0, 3, 6, 10], symbol: "m7♭5", name: "полууменьшённый септаккорд", quality: "half-diminished" },
-  { id: "diminished-7", intervals: [0, 3, 6, 9], symbol: "dim7", name: "уменьшённый септаккорд", quality: "diminished" },
-  { id: "augmented-7", intervals: [0, 4, 8, 10], symbol: "+7", name: "увеличенный септаккорд", quality: "augmented" },
-  { id: "augmented-major-7", intervals: [0, 4, 8, 11], symbol: "+maj7", name: "увеличенное трезвучие с большой септимой", quality: "augmented" },
-  { id: "major-add-9", intervals: [0, 2, 4, 7], symbol: "add9", name: "мажор с добавленной ноной", quality: "major" },
-  { id: "minor-add-9", intervals: [0, 2, 3, 7], symbol: "m(add9)", name: "минор с добавленной ноной", quality: "minor" },
-  { id: "dominant-9", intervals: [0, 2, 4, 7, 10], symbol: "9", name: "доминантнонаккорд", quality: "dominant" },
-  { id: "major-9", intervals: [0, 2, 4, 7, 11], symbol: "maj9", name: "большой мажорный нонаккорд", quality: "major" },
-  { id: "minor-9", intervals: [0, 2, 3, 7, 10], symbol: "m9", name: "минорный нонаккорд", quality: "minor" },
-  { id: "dominant-11", intervals: [0, 2, 4, 5, 7, 10], symbol: "11", name: "доминантовый ундецимаккорд", quality: "dominant" },
+  { id: "diminished-triad", intervals: [0, 3, 6], symbol: "dim", name: "diminished triad", quality: "diminished" },
+  { id: "augmented-triad", intervals: [0, 4, 8], symbol: "+", name: "augmented triad", quality: "augmented" },
+  { id: "major-6", intervals: [0, 4, 7, 9], symbol: "6", name: "major sixth", quality: "major" },
+  { id: "minor-6", intervals: [0, 3, 7, 9], symbol: "m6", name: "minor sixth", quality: "minor" },
+  { id: "dominant-7", intervals: [0, 4, 7, 10], symbol: "7", name: "dominant seventh", quality: "dominant" },
+  { id: "major-7", intervals: [0, 4, 7, 11], symbol: "maj7", name: "major seventh", quality: "major" },
+  { id: "minor-7", intervals: [0, 3, 7, 10], symbol: "m7", name: "minor seventh", quality: "minor" },
+  { id: "minor-major-7", intervals: [0, 3, 7, 11], symbol: "m(maj7)", name: "minor major seventh", quality: "minor" },
+  { id: "half-diminished-7", intervals: [0, 3, 6, 10], symbol: "m7♭5", name: "half-diminished seventh", quality: "half-diminished" },
+  { id: "diminished-7", intervals: [0, 3, 6, 9], symbol: "dim7", name: "diminished seventh", quality: "diminished" },
+  { id: "augmented-7", intervals: [0, 4, 8, 10], symbol: "+7", name: "augmented seventh", quality: "augmented" },
+  { id: "augmented-major-7", intervals: [0, 4, 8, 11], symbol: "+maj7", name: "augmented major seventh", quality: "augmented" },
+  { id: "major-add-9", intervals: [0, 2, 4, 7], symbol: "add9", name: "major add ninth", quality: "major" },
+  { id: "minor-add-9", intervals: [0, 2, 3, 7], symbol: "m(add9)", name: "minor add ninth", quality: "minor" },
+  { id: "dominant-9", intervals: [0, 2, 4, 7, 10], symbol: "9", name: "dominant ninth", quality: "dominant" },
+  { id: "major-9", intervals: [0, 2, 4, 7, 11], symbol: "maj9", name: "major ninth", quality: "major" },
+  { id: "minor-9", intervals: [0, 2, 3, 7, 10], symbol: "m9", name: "minor ninth", quality: "minor" },
+  { id: "dominant-11", intervals: [0, 2, 4, 5, 7, 10], symbol: "11", name: "dominant eleventh", quality: "dominant" },
 ] as const satisfies readonly ChordDefinition[];
 
 export type ChordDefinitionId = (typeof CHORD_DEFINITIONS)[number]["id"];
@@ -182,7 +182,7 @@ export function intervalClass(a: number, b: number): number {
 }
 
 export function intervalLabel(distance: number): string {
-  return ["унисон", "м2", "б2", "м3", "б3", "ч4/ч5", "тритон"][
+  return ["unison", "m2", "M2", "m3", "M3", "P4/P5", "tritone"][
     Math.max(0, Math.min(6, distance))
   ];
 }

@@ -48,10 +48,10 @@ describe("music domain", () => {
       CHORD_DEFINITIONS.find(({ id }) => id === "diminished-7"),
     ).toMatchObject({ intervals: [0, 3, 6, 9], quality: "diminished" });
     expect(CHORD_DEFINITIONS.find(({ id }) => id === "major-6")?.name).toBe(
-      "мажор с добавленной секстой",
+      "major sixth",
     );
     expect(CHORD_DEFINITIONS.find(({ id }) => id === "minor-6")?.name).toBe(
-      "минор с добавленной секстой",
+      "minor sixth",
     );
     expect(
       CHORD_DEFINITIONS.find(({ id }) => id === "dominant-11")?.intervals,

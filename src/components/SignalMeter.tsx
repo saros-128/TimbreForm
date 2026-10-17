@@ -8,7 +8,7 @@ export function SignalMeter({ rms, inputPeakDb, noiseFloorDb }: SignalMeterProps
   const level = Math.max(0, Math.min(1, (20 * Math.log10(Math.max(rms, 1e-6)) + 70) / 65));
   const clipping = inputPeakDb > -1;
   return (
-    <div className="signal" title={`Входной пик ${inputPeakDb.toFixed(1)} dBFS · шум ${noiseFloorDb.toFixed(1)} dB`}>
+    <div className="signal" title={`Input peak ${inputPeakDb.toFixed(1)} dBFS · noise ${noiseFloorDb.toFixed(1)} dB`}>
       <span className="signal-label">IN</span>
       <span className="signal-track">
         <span

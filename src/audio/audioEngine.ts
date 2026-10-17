@@ -63,7 +63,7 @@ export class AudioEngine {
       .filter((device) => device.kind === "audioinput")
       .map((device) => ({
         deviceId: device.deviceId,
-        label: device.label || `Аудиовход ${anonymousIndex++}`,
+        label: device.label || `Audio input ${anonymousIndex++}`,
       }));
   }
 
@@ -72,7 +72,7 @@ export class AudioEngine {
     await this.disposeCurrent();
     if (generation !== this.generation) return false;
     if (!AudioEngine.isSupported()) {
-      throw new Error("Web Audio или доступ к устройствам ввода не поддерживается браузером.");
+      throw new Error("This browser does not support Web Audio or audio input access.");
     }
 
     const constraints: MediaTrackConstraints = {
