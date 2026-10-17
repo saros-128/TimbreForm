@@ -1,0 +1,19 @@
+name: phase-visualizer
+services:
+  app:
+    build:
+      context: .
+      target: runtime
+    ports:
+      - "127.0.0.1:8093:8080"
+  test:
+    build:
+      context: .
+      target: deps
+    working_dir: /app
+    volumes:
+      - .:/app
+      - dependencies:/app/node_modules
+    command: npm run test:run
+volumes:
+  dependencies:

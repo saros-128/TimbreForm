@@ -1,0 +1,12 @@
+import {fireEvent,render,screen,within} from '@testing-library/react';
+import {describe,it,expect,vi} from 'vitest';
+import {App} from './App';
+const audio=vi.hoisted(()=>({status:'idle',supported:true,devices:[{deviceId:'di',label:'DI interface'}],error:null,frame:null,waveform:null,trackedNotes:[],monophonicPitch:null,onsetPitch:null,startMicrophone:vi.fn(),stop:vi.fn(),setGain:vi.fn(),startDemo:vi.fn()}));
+vi.mock('./hooks/useHarmonicAudio',()=>({createAnalyzerConfig:(x:unknown)=>x,useHarmonicAudio:()=>audio}));
+vi.mock('./components/PhaseSceneScope',()=>({PhaseSceneScope:(props:any)=><div data-testid="phase" data-geometry={props.geometry} data-preset={props.phasePreset} data-source={props.phaseSourceMode}>{props.backgroundLayer}</div>}));
+vi.mock('./components/FractalSceneScope',()=>({FractalSceneScope:()=><div data-testid="fractal"/>}));
+vi.mock('./components/ImageMorphBackdrop',()=>({ImageMorphBackdrop:()=><div data-testid="images"/>}));
+describe('standalone Phase',()=>{
+it('opens the selected input and exposes only Phase',()=>{render(<App/>);fireEvent.change(screen.getByLabelText('Устройство ввода'),{target:{value:'di'}});fireEvent.click(screen.getByRole('button',{name:'Открыть вход'}));expect(audio.startMicrophone).toHaveBeenCalledWith('di');expect(screen.queryByText('Гриф')).toBeNull();expect(screen.queryByText('Real-Time Analysis')).toBeNull();});
+it('retains geometry, source modes, fractal, spatial controls and independent preset values',()=>{render(<App/>);fireEvent.click(screen.getByRole('button',{name:'Поверхность'}));fireEvent.click(screen.getByRole('button',{name:'Сумма'}));expect(screen.getByTestId('phase')).toHaveAttribute('data-geometry','surface');expect(screen.getByTestId('phase')).toHaveAttribute('data-source','signal');fireEvent.click(screen.getByRole('button',{name:'Фрактал'}));expect(screen.getByTestId('fractal')).toBeInTheDocument();fireEvent.click(screen.getByRole('button',{name:'Настроить'}));const panel=screen.getByRole('region',{name:'Настройка изображения'});const sliders=within(panel).getAllByRole('slider');expect(sliders.length).toBeGreaterThan(20);fireEvent.change(screen.getByRole('slider',{name:'Glow фазы'}),{target:{value:'170'}});fireEvent.click(within(panel).getByRole('button',{name:/Пространство/}));expect(screen.getByTestId('phase')).toHaveAttribute('data-preset','spatial');fireEvent.click(within(panel).getByRole('button',{name:/Классика/}));expect(screen.getByRole('slider',{name:'Glow фазы'})).toHaveValue('170');});
+});

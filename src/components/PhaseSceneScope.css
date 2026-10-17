@@ -1,0 +1,75 @@
+.phase-geometry-controls {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  font-size: 11px;
+}
+.phase-geometry-controls label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.phase-geometry-controls button,
+.phase-geometry-controls select {
+  padding: 6px 10px;
+  background: #14251d;
+  border: 1px solid #3c5749;
+  border-radius: 5px;
+  color: #c6ddcf;
+  font: inherit;
+}
+.phase-geometry-controls button[aria-pressed="true"] {
+  background: #365541;
+  color: #e4f4e7;
+}
+.phase-geometry-controls button:focus-visible,
+.phase-geometry-controls select:focus-visible {
+  outline: 2px solid #edcfa6;
+  outline-offset: 2px;
+}
+.phase-fullscreen-stage:is(:fullscreen, :-webkit-full-screen) .lissajous-shell {
+  display: flex !important;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+.phase-fullscreen-stage:is(:fullscreen, :-webkit-full-screen)
+  .lissajous-viewport {
+  flex: 1;
+  min-height: 0;
+  aspect-ratio: auto !important;
+}
+.phase-fullscreen-stage:is(:fullscreen, :-webkit-full-screen) .visual-pane {
+  display: flex;
+  flex-direction: column;
+}
+.phase-fullscreen-stage:is(:fullscreen, :-webkit-full-screen)
+  .phase-geometry-controls {
+  position: absolute;
+  z-index: 5;
+  left: 20px;
+  top: 55px;
+  background: #0b1519bf;
+  padding: 7px;
+  border-radius: 8px;
+}
+.phase-controls-idle .phase-geometry-controls {
+  visibility: hidden;
+}
+.phase-fullscreen-stage:is(:fullscreen, :-webkit-full-screen) figcaption {
+  padding-right: 110px;
+}
+.visual-card:has(.phase-geometry-controls) {
+  height: auto;
+}
+.visual-stage:has(.phase-geometry-controls) {
+  overflow: visible;
+}
+.phase-fullscreen-stage:is(:fullscreen, :-webkit-full-screen) {
+  overflow: hidden;
+}
+.phase-fullscreen-stage .visual-pane {
+  min-width: 0;
+}
