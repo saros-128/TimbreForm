@@ -34,7 +34,7 @@ Phase uses the live waveform and tracked notes independently of HarmonicVis Coll
 
 ## Provenance
 
-Extracted from local HarmonicVis worktree `harmony-geometry-phase`, commit `bc79cb02ff340e1841c5733a43b10fa0aa9a88a0`. The source worktree was clean and has no configured Git remote. No source files or containers were changed. This repository has no remote until a GitHub destination is confirmed.
+Extracted from local HarmonicVis worktree `harmony-geometry-phase`, commit `bc79cb02ff340e1841c5733a43b10fa0aa9a88a0`. The source worktree was clean and has no configured Git remote. No source files or containers were changed. Repository: https://github.com/saros-128/TimbreForm. No license has been selected or added.
 
 ## Accuracy and verification limits
 
