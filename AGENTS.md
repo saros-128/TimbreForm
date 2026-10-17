@@ -1,4 +1,4 @@
-# Phase Visualizer
+# TimbreForm
 
 - Build, test, install dependencies and run only in Docker.
 - Keep this application focused on Phase; do not add notation lessons or fretboard UI.

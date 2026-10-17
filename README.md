@@ -1,4 +1,6 @@
-# Phase Visualizer
+# TimbreForm
+
+Audio Visualizer
 
 Standalone extraction of the complete Phase view from HarmonicVis. React, TypeScript, Vite and Web Audio; Canvas phase rendering and WebGL fractal background. No external services, account, upload or backend.
 

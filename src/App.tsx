@@ -533,7 +533,7 @@ const signalFrame = audio.frame;
       ? Math.min(1, Math.max(0, signalFrame.rms * 4))
       : 0;
   const fractalZoomOffset = (phaseVisualControls.fractalZoom - 50) / 50;
-return <div className="app-shell phase-app"><header className="topbar"><div className="brand"><strong>Phase Visualizer</strong></div>
+return <div className="app-shell phase-app"><header className="topbar"><div className="brand"><span><strong>TimbreForm</strong><small>Audio Visualizer</small></span></div>
         <div className="source-controls">
           <select
             aria-label="Устройство ввода"
